@@ -266,6 +266,10 @@ impl<C, N, E, W> Subscriber<C, N, E, W> {
     ///
     /// See [`TestWriter`] for additional details.
     ///
+    /// # Notes
+    /// Usage of this method is will overwrite the result of a previous [`with_writer`] invocation;
+    /// the two do not compose.
+    ///
     /// # Examples
     ///
     /// Using [`TestWriter`] to let `cargo test` capture test output:
@@ -283,6 +287,7 @@ impl<C, N, E, W> Subscriber<C, N, E, W> {
     /// [capturing]:
     /// https://doc.rust-lang.org/book/ch11-02-running-tests.html#showing-function-output
     /// [`TestWriter`]: super::writer::TestWriter
+    /// [`with_writer`]: Subscriber::with_writer
     pub fn with_test_writer(self) -> Subscriber<C, N, E, TestWriter> {
         Subscriber {
             fmt_fields: self.fmt_fields,
